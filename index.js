@@ -15,6 +15,7 @@ const limiter = rateLimit({
   max: 5, // Maksimal 5 request
   message: (req, res) => {
     res.status(429).json({
+      code: 429,
       status: "error",
       message:
         "Batas permintaan harian Anda telah tercapai. Silakan coba lagi besok.",
@@ -28,8 +29,7 @@ app.use(limiter);
 app.get("/api/data", (req, res) => {
   const clientIP = req.ip;
   res.json({
-    message: "Ini adalah contoh data dari API. ini IP anda: ",
-    clientIP,
+    message: "Ini adalah contoh data dari API. ini IP anda: " + clientIP,
   });
 });
 
